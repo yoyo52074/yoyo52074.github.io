@@ -350,32 +350,7 @@
             border: 1px solid #2a2d3e;
         }
         .btn-github:hover { background: rgba(255, 255, 255, 0.1); border-color: #64748b; }
-
-        /* 經歷 Timeline Grid */
-        .timeline-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        .timeline-item {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid #2a2d3e;
-            padding: 20px;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-        .timeline-item:hover {
-            border-color: rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.05);
-            transform: translateY(-3px);
-        }
-        .timeline-item h4 {
-            color: #fff;
-            margin: 0 0 10px 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        
         .company-logo {
             width: 40px;
             height: 40px;
@@ -383,6 +358,54 @@
             object-fit: contain;
             background: rgba(255, 255, 255, 0.9);
             padding: 3px;
+        }
+
+        /* 經歷 Timeline 垂直時間線設計 */
+        .timeline-container {
+            position: relative;
+            border-left: 2px solid rgba(0, 255, 204, 0.3);
+            padding-left: 30px;
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        .timeline-item {
+            position: relative;
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid #2a2d3e;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        .timeline-item:hover {
+            border-color: var(--primary-glow);
+            transform: translateX(5px);
+            box-shadow: -5px 5px 20px rgba(0, 255, 204, 0.08);
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            /* 30px padding + 2px border + 6px (一半的點寬度) = 38px 偏移量讓點置中在線上 */
+            left: -38px; 
+            top: 25px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--bg-color);
+            border: 2px solid var(--primary-glow);
+            box-shadow: 0 0 10px var(--primary-glow);
+            z-index: 1;
+        }
+        .timeline-item h4 {
+            color: #fff;
+            margin: 0 0 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.2rem;
         }
 
         /* 聯絡我區塊 */
@@ -457,9 +480,6 @@
             .skills-container { 
                 grid-template-columns: 1fr; 
             }
-            .timeline-grid { 
-                grid-template-columns: 1fr; 
-            }
             .project-header { 
                 flex-direction: column; 
                 align-items: flex-start; 
@@ -472,7 +492,15 @@
             .btn-custom { 
                 width: 100%; 
             }
-            .about-text {
+            /* 時間線手機版微調 */
+            .timeline-container {
+                margin-left: 10px;
+                padding-left: 20px;
+            }
+            .timeline-item::before {
+                left: -28px; /* 適應縮小的 padding */
+            }
+            .about-text, .timeline-item {
                 padding: 15px;
             }
             .contact-box {
@@ -598,7 +626,7 @@
                     </div>
                 </div>
 
-                <!-- 專案 2 -->
+                <!-- 專案 2 (文案已依照截圖更新) -->
                 <div class="project-card">
                     <div class="project-header">
                         <div style="display: flex; align-items: center; gap: 15px;">
@@ -613,7 +641,6 @@
                         <li><span>訂單紀錄備份</span>：自動記錄與備份每一筆交易資訊，確保商城數據安全且方便隨時查閱。</li>
                         <li><span>管理員後台指令</span>：支援DC指令，快速後臺設定。</li>
                     </ul>
-                    <!-- 新增機器人官網按鈕 -->
                     <div class="project-actions">
                         <a href="https://yoyotv.xyz" target="_blank" class="btn-custom btn-download"><i class="fa-solid fa-globe"></i> 機器人官網</a>
                     </div>
@@ -623,32 +650,39 @@
             <!-- 歷年成就 -->
             <section id="experience" class="content-section scroll-reveal">
                 <h3 class="section-title"><i class="fa-solid fa-timeline"></i> 歷年成就與經歷</h3>
-                <div class="timeline-grid">
-                    <div class="timeline-item">
-                        <div class="project-date" style="display: inline-block; margin-bottom: 10px;">2026/6/1 ~ 至今</div>
-                        <h4><img src="foam.png" alt="泡沫商城" class="company-logo"> 加入泡沫商城</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">有空去朋友那當客服，一路晉升至管理員。目前負責處理商城事務，以及專屬 Discord 機器人的開發與維護。</p>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="project-date" style="display: inline-block; margin-bottom: 10px;">2025/8/11 ~ 2026/4/1</div>
-                        <h4><img src="DMS.png" alt="DMS SERVICE" class="company-logo"> 加入 DMS SERVICE</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">偶然看到客服徵才，剛好憑藉先前累積的行業經驗，前往申請面試並順利通過。</p>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="project-date" style="display: inline-block; margin-bottom: 10px;">2025/7/24 ~ 2025/9/10</div>
-                        <h4><img src="server.png" alt="Minecraft 廢人伺服器" class="company-logo" style="background: none; padding: 0;"> Minecraft 廢人伺服器</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">自從商城被刪除後進入休閒狀態，決定做一些自己喜歡、有興趣的事，因而創立此伺服器。</p>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="project-date" style="display: inline-block; margin-bottom: 10px;">2025/2/10 ~ 2025/7/21</div>
-                        <h4><img src="yoyoshop.png" alt="yoyoshop" class="company-logo"> 創立 yoyoshop</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">因為 Anthony 的啟發，認識到代儲行業並開始自行創業。雖最後因同行惡意檢舉造成伺服器被刪除，但累積了寶貴的實戰經驗。</p>
-                    </div>
+                <!-- 改為垂直時間線設計，並按照最早至最新排序 -->
+                <div class="timeline-container">
+                    
                     <div class="timeline-item">
                         <div class="project-date" style="display: inline-block; margin-bottom: 10px;">2024/10/16 ~ 2025/6/16</div>
                         <h4><img src="anthony.png" alt="Anthony's Stock" class="company-logo"> Anthony's Stock</h4>
                         <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">最初在徵客服人員時，為了增加一份收入而應徵，這也是我踏入代儲行業的重要啟發點。</p>
                     </div>
+
+                    <div class="timeline-item">
+                        <div class="project-date" style="display: inline-block; margin-bottom: 10px;">2025/2/10 ~ 2025/7/21</div>
+                        <h4><img src="yoyoshop.png" alt="yoyoshop" class="company-logo"> 創立 yoyoshop</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">因為 Anthony 的啟發，認識到代儲行業並開始自行創業。雖最後因同行惡意檢舉造成伺服器被刪除，但累積了寶貴的實戰經驗。</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="project-date" style="display: inline-block; margin-bottom: 10px;">2025/7/24 ~ 2025/9/10</div>
+                        <h4><img src="server.png" alt="Minecraft 廢人伺服器" class="company-logo" style="background: none; padding: 0;"> Minecraft 廢人伺服器</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">自從商城被刪除後進入休閒狀態，決定做一些自己喜歡、有興趣的事，因而創立此伺服器。</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="project-date" style="display: inline-block; margin-bottom: 10px;">2025/8/11 ~ 2026/4/1</div>
+                        <h4><img src="DMS.png" alt="DMS SERVICE" class="company-logo"> 加入 DMS SERVICE</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">偶然看到客服徵才，剛好憑藉先前累積的行業經驗，前往申請面試並順利通過。</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="project-date" style="display: inline-block; margin-bottom: 10px;">2026/6/1 ~ 至今</div>
+                        <h4><img src="foam.png" alt="泡沫商城" class="company-logo"> 加入泡沫商城</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">有空去朋友那當客服，一路晉升至管理員。目前負責處理商城事務，以及專屬 Discord 機器人的開發與維護。</p>
+                    </div>
+
                 </div>
             </section>
 
