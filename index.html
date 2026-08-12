@@ -86,10 +86,40 @@
         }
         .profile-title {
             color: var(--primary-glow);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             font-size: 0.95rem;
             letter-spacing: 1px;
         }
+        
+        /* 社交連結區塊 */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .social-links a {
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #2a2d3e;
+        }
+        .social-links a:hover {
+            color: var(--primary-glow);
+            background: rgba(0, 255, 204, 0.1);
+            border-color: var(--primary-glow);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 255, 204, 0.2);
+        }
+
         .profile-bio {
             color: var(--text-main);
             font-size: 0.95rem;
@@ -299,6 +329,22 @@
             <h2 class="profile-name">Yoyo</h2>
             <div class="profile-title">>_ 程式開發 / 網站設計 / 伺服器管理</div>
             
+            <!-- 個人連結區塊 -->
+            <div class="social-links">
+                <a href="https://discord.com/users/1112757690721124382" target="_blank" title="Discord">
+                    <i class="fa-brands fa-discord"></i>
+                </a>
+                <a href="https://www.youtube.com/@tw_yoyo" target="_blank" title="YouTube">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+                <a href="https://github.com/yoyo52074" target="_blank" title="GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="mailto:tw.yoyoshop@gmail.com" title="Email">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+            </div>
+            
             <p class="profile-bio">
                 嗨！我是一位對程式開發和網站設計充滿熱情的人，喜歡挑戰新事物並嘗試創作屬於自己的作品。<br><br>
                 <strong>領域探索：</strong><br>
@@ -388,7 +434,6 @@
                     <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">最初在徵客服人員時，為了增加一份收入而應徵，這也是我踏入代儲行業的重要啟發點。</p>
                 </div>
             </div>
-
         </main>
     </div>
 </body>
