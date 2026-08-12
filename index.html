@@ -15,6 +15,14 @@
         }
         body {
             background-color: var(--bg-color);
+            /* 自訂背景特效：科技感網格 */
+            background-image: 
+                radial-gradient(circle at center, transparent 0%, var(--bg-color) 100%),
+                linear-gradient(rgba(0, 255, 204, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 204, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 30px 30px, 30px 30px;
+            background-attachment: fixed;
+            
             color: var(--text-main);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -48,6 +56,7 @@
             display: flex;
             gap: 30px;
             padding: 0 20px;
+            min-height: 80vh;
         }
 
         /* 左側個人檔案區 */
@@ -61,7 +70,14 @@
             height: fit-content;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             text-align: center;
+            /* 給側邊欄一個預設的動畫狀態 */
+            animation: slideDown 0.8s ease-out forwards;
         }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .profile-avatar {
             width: 130px;
             height: 130px;
@@ -178,7 +194,7 @@
             padding: 25px;
             margin-bottom: 25px;
             border: 1px solid #2a2d3e;
-            transition: all 0.3s ease;
+            transition: all 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
             position: relative;
             overflow: hidden;
         }
@@ -288,6 +304,7 @@
         .timeline-item:hover {
             border-color: rgba(255,255,255,0.2);
             background: rgba(255,255,255,0.05);
+            transform: translateY(-3px);
         }
         .timeline-item h4 {
             color: #fff;
@@ -304,7 +321,30 @@
             background: rgba(255, 255, 255, 0.9);
             padding: 3px;
         }
+
+        /* 滾動載入動畫基礎設定 */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
         
+        /* 專屬頁尾設定 */
+        footer {
+            text-align: center;
+            padding: 25px 20px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            background: rgba(21, 23, 34, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
         @media (max-width: 768px) {
             .container { flex-direction: column; margin: 20px auto; padding: 0 15px; }
             .profile-sidebar { min-width: 100%; }
@@ -369,9 +409,9 @@
         <!-- 右側：成就與經歷區塊 -->
         <main class="content-area">
             
-            <h3 class="section-title"><i class="fa-solid fa-box-open"></i> 核心專案開發</h3>
+            <h3 class="section-title scroll-reveal"><i class="fa-solid fa-box-open"></i> 核心專案開發</h3>
             
-            <div class="project-card">
+            <div class="project-card scroll-reveal">
                 <div class="project-header">
                     <div style="display: flex; align-items: center; gap: 15px;">
                         <img src="server.png" alt="Minecraft Server" class="company-logo" style="background: none; padding: 0;">
@@ -400,35 +440,35 @@
                 </div>
             </div>
 
-            <h3 class="section-title" style="margin-top: 40px;"><i class="fa-solid fa-timeline"></i> 歷年成就與經歷</h3>
+            <h3 class="section-title scroll-reveal" style="margin-top: 40px;"><i class="fa-solid fa-timeline"></i> 歷年成就與經歷</h3>
             
             <div class="timeline-grid">
                 
-                <div class="timeline-item">
+                <div class="timeline-item scroll-reveal">
                     <div class="project-date" style="display: inline-block; margin-bottom: 10px;">2026/6/1 ~ 至今</div>
                     <h4><img src="foam.png" alt="泡沫商城" class="company-logo"> 加入泡沫商城</h4>
                     <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">有空去朋友那當客服，一路晉升至管理員。目前負責處理商城事務，以及專屬 Discord 機器人的開發與維護。</p>
                 </div>
 
-                <div class="timeline-item">
+                <div class="timeline-item scroll-reveal">
                     <div class="project-date" style="display: inline-block; margin-bottom: 10px;">2025/8/11 ~ 2026/4/1</div>
                     <h4><img src="DMS.png" alt="DMS SERVICE" class="company-logo"> 加入 DMS SERVICE</h4>
                     <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">偶然看到客服徵才，剛好憑藉先前累積的行業經驗，前往申請面試並順利通過。</p>
                 </div>
 
-                <div class="timeline-item">
+                <div class="timeline-item scroll-reveal">
                     <div class="project-date" style="display: inline-block; margin-bottom: 10px;">2025/7/24 ~ 2025/9/10</div>
                     <h4><img src="server.png" alt="Minecraft 廢人伺服器" class="company-logo" style="background: none; padding: 0;"> Minecraft 廢人伺服器</h4>
                     <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">自從商城被刪除後進入休閒狀態，決定做一些自己喜歡、有興趣的事，因而創立此伺服器。</p>
                 </div>
                 
-                <div class="timeline-item">
+                <div class="timeline-item scroll-reveal">
                     <div class="project-date" style="display: inline-block; margin-bottom: 10px;">2025/2/10 ~ 2025/7/21</div>
                     <h4><img src="yoyoshop.png" alt="yoyoshop" class="company-logo"> 創立 yoyoshop</h4>
                     <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">因為 Anthony 的啟發，認識到代儲行業並開始自行創業。雖最後因同行惡意檢舉造成伺服器被刪除，但累積了寶貴的實戰經驗。</p>
                 </div>
 
-                <div class="timeline-item">
+                <div class="timeline-item scroll-reveal">
                     <div class="project-date" style="display: inline-block; margin-bottom: 10px;">2024/10/16 ~ 2025/6/16</div>
                     <h4><img src="anthony.png" alt="Anthony's Stock" class="company-logo"> Anthony's Stock</h4>
                     <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">最初在徵客服人員時，為了增加一份收入而應徵，這也是我踏入代儲行業的重要啟發點。</p>
@@ -436,5 +476,35 @@
             </div>
         </main>
     </div>
+
+    <!-- 專屬頁尾 -->
+    <footer>
+        &copy; 2026 yoyo. All rights reserved.
+    </footer>
+
+    <!-- 滾動載入動畫腳本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 建立 Intersection Observer
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // 當元素進入畫面時，加入 'active' class 來觸發動畫
+                        entry.target.classList.add('active');
+                        // 動畫觸發後就不再重複觀察，節省效能
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                // 元素出現 10% 在畫面上時觸發
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            });
+
+            // 抓取所有帶有 scroll-reveal class 的元素
+            const hiddenElements = document.querySelectorAll('.scroll-reveal');
+            hiddenElements.forEach((el) => observer.observe(el));
+        });
+    </script>
 </body>
 </html>
