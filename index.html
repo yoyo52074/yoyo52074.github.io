@@ -241,7 +241,7 @@
             border-color: #64748b;
         }
 
-        /* 經歷 Timeline Grid & 圖片設定 */
+        /* 經歷 Timeline Grid */
         .timeline-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -274,14 +274,67 @@
             background: rgba(255, 255, 255, 0.9);
             padding: 3px;
         }
+
+        /* 💻 互動終端機功能區塊樣式 */
+        .terminal-box {
+            background: #090a0f;
+            border: 1px solid var(--primary-glow);
+            border-radius: 12px;
+            padding: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            box-shadow: inset 0 0 15px rgba(0, 255, 204, 0.1);
+            margin-top: 30px;
+        }
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #2a2d3e;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        .terminal-dots {
+            display: flex;
+            gap: 6px;
+        }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot-red { background: #ff5f56; }
+        .dot-yellow { background: #ffbd2e; }
+        .dot-green { background: #27c93f; }
         
-        /* 📱 手機版專屬優化 */
+        .terminal-output {
+            color: #a5b4fc;
+            min-height: 80px;
+            max-height: 150px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            white-space: pre-line;
+        }
+        .terminal-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .term-btn {
+            background: rgba(0, 255, 204, 0.1);
+            color: var(--primary-glow);
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+        .term-btn:hover {
+            background: var(--primary-glow);
+            color: var(--bg-color);
+        }
+        
         @media (max-width: 768px) {
-            .container { 
-                flex-direction: column; 
-                margin: 20px auto;
-                padding: 0 15px;
-            }
+            .container { flex-direction: column; margin: 20px auto; padding: 0 15px; }
             .profile-sidebar { min-width: 100%; }
             .project-header { flex-direction: column; align-items: flex-start; }
             .project-actions { flex-direction: column; width: 100%; }
@@ -299,7 +352,6 @@
         <!-- 左側：個人簡介區塊 -->
         <aside class="profile-sidebar">
             <div class="profile-avatar">
-                <!-- 直接讀取同層資料夾的圖片 -->
                 <img src="yoyo.jpg" alt="Yoyo">
             </div>
             <h2 class="profile-name">Yoyo</h2>
@@ -394,19 +446,55 @@
                     <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">最初在徵客服人員時，為了增加一份收入而應徵，這也是我踏入代儲行業的重要啟發點。</p>
                 </div>
             </div>
-            
-            <h3 class="section-title" style="margin-top: 40px;"><i class="fa-solid fa-pen-clip"></i> 最新動態日誌</h3>
-            
-            <article class="project-card" style="padding: 20px;">
-                <h4 class="project-title" style="font-size: 1.2rem; margin-bottom: 5px;">網站設計與圖片整合完成</h4>
-                <div class="project-date" style="display: inline-block; margin-bottom: 15px;">
-                    <i class="fa-regular fa-clock"></i> 2026/08/13
+
+            <!-- 新增：網頁互動功能區（互動終端機） -->
+            <div class="terminal-box">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <div class="dot dot-red"></div>
+                        <div class="dot dot-yellow"></div>
+                        <div class="dot dot-green"></div>
+                    </div>
+                    <span>yoyo@terminal-v1.6 ~ guest@browser</span>
                 </div>
-                <div style="color: var(--text-main); white-space: pre-line; font-size: 0.95rem;">完美支援手機版檢視 (RWD) 與高畫質圖片載入！接下來準備將所有檔案上傳並部署至 GitHub Pages，正式對外公開！</div>
-            </article>
+                <div id="terminalOutput" class="terminal-output">
+                    > 歡迎使用 Yoyo 的互動終端機！
+                    > 點擊下方按鈕來執行指令，了解更多資訊。
+                </div>
+                <div class="terminal-controls">
+                    <button class="term-btn" onclick="runCommand('whoami')">> 查看身分</button>
+                    <button class="term-btn" onclick="runCommand('skills')">> 核心技能</button>
+                    <button class="term-btn" onclick="runCommand('status')">> 系統狀態</button>
+                    <button class="term-btn" onclick="runCommand('clear')">> 清除畫面</button>
+                </div>
+            </div>
 
         </main>
     </div>
+
+    <!-- 終端機互動邏輯 JavaScript -->
+    <script>
+        function runCommand(cmd) {
+            const output = document.getElementById('terminalOutput');
+            let text = "";
+            switch(cmd) {
+                case 'whoami':
+                    text = "> whoami\n[INFO] Yoyo: 獨立開發者、伺服器管理員、泡沫商城管理員。目標是成為專業遊戲開發者！";
+                    break;
+                case 'skills':
+                    text = "> cat skills.txt\n[SKILLS] Python, C++, HTML/CSS, Cloudflare DNS, Pterodactyl, Minecraft Plugin Development.";
+                    break;
+                case 'status':
+                    text = "> systemctl status\n[ONLINE] 伺服器運行正常。Minecraft 伺服器架設工具 v1.6 持續維護中。";
+                    besides = true;
+                    break;
+                case 'clear':
+                    text = "> 歡迎使用 Yoyo 的互動終端機！\n> 點擊下方按鈕來執行指令，了解更多資訊。";
+                    break;
+            }
+            output.innerText = text;
+        }
+    </script>
 
 </body>
 </html>
