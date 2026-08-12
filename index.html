@@ -8,7 +8,7 @@
     <style>
         /* 全局基礎設定 */
         * {
-            box-sizing: border-box; /* 確保 padding 不會撐破外框，對手機排版極為重要 */
+            box-sizing: border-box;
         }
 
         :root {
@@ -38,7 +38,7 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
-            overflow-x: hidden; /* 防止任何元素意外超出螢幕造成水平滾動 */
+            overflow-x: hidden;
         }
         
         /* 頂部導覽列 */
@@ -144,7 +144,7 @@
             justify-content: center;
             gap: 15px;
             margin-bottom: 25px;
-            flex-wrap: wrap; /* 允許換行 */
+            flex-wrap: wrap;
         }
         .social-links a {
             color: var(--text-muted);
@@ -184,7 +184,7 @@
             display: flex;
             flex-direction: column;
             gap: 50px;
-            min-width: 0; /* 讓 flex 子元素不要超出父元素 */
+            min-width: 0;
         }
         
         .content-section {
@@ -423,29 +423,24 @@
            手機版排版深度優化 (Media Queries)
            ========================================= */
         @media (max-width: 768px) {
-            /* 頂部導覽縮減與換行 */
             header { 
                 flex-direction: column; 
                 gap: 10px; 
                 padding: 15px; 
             }
             .navbar {
-                flex-wrap: wrap; /* 允許連結換行 */
+                flex-wrap: wrap; 
                 justify-content: center;
                 gap: 12px;
             }
             .navbar a {
                 font-size: 0.9rem;
             }
-            
-            /* 整體容器留白縮減 */
             .container { 
                 flex-direction: column; 
                 margin: 20px auto; 
                 padding: 0 15px; 
             }
-            
-            /* 左側區塊解除固定並縮減空間 */
             .profile-sidebar { 
                 position: relative; 
                 top: 0; 
@@ -456,21 +451,15 @@
                 width: 100px; 
                 height: 100px; 
             }
-            
-            /* 右側區塊間距縮減 */
             .content-area {
                 gap: 35px;
             }
-            
-            /* Grid 強制轉換為 1 欄 (極重要，防超出螢幕) */
             .skills-container { 
                 grid-template-columns: 1fr; 
             }
             .timeline-grid { 
                 grid-template-columns: 1fr; 
             }
-            
-            /* 專案卡片標題區塊垂直排列 */
             .project-header { 
                 flex-direction: column; 
                 align-items: flex-start; 
@@ -483,8 +472,6 @@
             .btn-custom { 
                 width: 100%; 
             }
-            
-            /* 關於與聯絡區塊留白微調 */
             .about-text {
                 padding: 15px;
             }
@@ -615,18 +602,21 @@
                 <div class="project-card">
                     <div class="project-header">
                         <div style="display: flex; align-items: center; gap: 15px;">
-                            <!-- 圖片已更新為 foambot.png -->
                             <img src="foambot.png" alt="Foam Bot" class="company-logo" style="background: none; padding: 0;">
                             <h4 class="project-title">泡沫商城 - 專屬 Discord 機器人</h4>
                         </div>
                         <span class="project-date">2026 專案開發</span>
                     </div>
-                    <p style="color: var(--text-main); margin-bottom: 15px;">為了減輕商城客服人員的負擔，我獨立開發了一款 Discord 機器人，協助自動化處理訂單查詢、常見問題回覆以及客服票務系統 (Ticket System)。</p>
+                    <p style="color: var(--text-main); margin-bottom: 15px;">我獨立開發了一款 Discord 機器人，協助自動化處理訂單查詢、餘額以及客服票務系統 (Ticket System)。</p>
                     <ul class="feature-list">
                         <li><span>Ticket 票務系統</span>：一鍵生成專屬客服頻道，保障客戶隱私。</li>
                         <li><span>訂單紀錄備份</span>：自動記錄與備份每一筆交易資訊，確保商城數據安全且方便隨時查閱。</li>
-                        <li><span>管理員後台指令</span>：支援快速禁言、身分組發放等一鍵指令。</li>
+                        <li><span>管理員後台指令</span>：支援DC指令，快速後臺設定。</li>
                     </ul>
+                    <!-- 新增機器人官網按鈕 -->
+                    <div class="project-actions">
+                        <a href="https://yoyotv.xyz" target="_blank" class="btn-custom btn-download"><i class="fa-solid fa-globe"></i> 機器人官網</a>
+                    </div>
                 </div>
             </section>
 
